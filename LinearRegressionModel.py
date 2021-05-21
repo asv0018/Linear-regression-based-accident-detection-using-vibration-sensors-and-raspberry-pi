@@ -1,12 +1,14 @@
 from sklearn import linear_model
 import pandas
+import os
 
 class LinearRegressionModel:
     def __init__(self, path_of_dataset, tuning_value):
         # The dataset is accessed and created the linear regressionModel and fit X, Y
         self.dataset_path = path_of_dataset
         self.tuning_val = tuning_value
-        df = pandas.read_csv("dataset.csv")
+        path = os.path.dirname(__file__)
+        df = pandas.read_csv(path+path_of_dataset)
         self.X = df[['FREQUENCY']]
         self.Y = df['OUTPUT']
         self.regr = linear_model.LinearRegression()
