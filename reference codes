@@ -1,0 +1,6 @@
+# Never ending loop
+#latitude, longitude = get_geolocation()
+#location_link = "https://maps.google.com/?q="+latitude+" ,"+longitude
+#msg = "There has been an accident suspected at the location with the coordinates "+latitude+","+longitude+".\r Try with the google maps link to locate the position. "+location_link
+#capture_pictures()
+#send_message(emergency_number, msg)
