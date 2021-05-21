@@ -54,7 +54,7 @@ def capture_pictures():
     i = 0
     while i < 10:
         return_value, image = camera.read()
-        cv2.imwrite('./images/accident_image'+str(i)+'.jpg', image)
+        cv2.imwrite('./images/accident-image'+str(i)+'.png', image)
         i += 1
     del(camera)
 
@@ -62,13 +62,13 @@ def send_messages_telegram(msg):
     resp = requests.get("https://api.telegram.org/bot1859820472:AAFxymdOoQrRcrLNKPR5lGYUBG8Qtz_EV5k/sendMessage?chat_id=584870711&text={0}".format(msg))
     print(resp.status_code)
 
-def send_images_in_telegram():
+def send_images_in_telegram(msg):
     for i in range(0,10):
-        img_name = './images/accident_image'+str(i)+'.jpg'
-        files={"photo":open("someimage.jpg", "rb")}
-        url = "https://api.telegram.org/bot1859820472:AAFxymdOoQrRcrLNKPR5lGYUBG8Qtz_EV5k/sendPhoto?chat_id=584870711&caption=ahaha_hahaha"
+        img_name = './images/accident-image'+str(i)+'.png'
+        files={"photo":open(img_name, "rb")}
+        url = "https://api.telegram.org/bot1859820472:AAFxymdOoQrRcrLNKPR5lGYUBG8Qtz_EV5k/sendPhoto?chat_id=584870711&caption="+msg
         print(url)
-        resp = requests.post(url, files)
+        resp = requests.post(url, files=files)
         print(resp.status_code)
         print(resp.text)
         
@@ -81,8 +81,6 @@ def send_images_in_telegram():
 #send_message(emergency_number, msg)
 print("STARTING NOW")
 while True:
-    capture_pictures()
-    send_images_in_telegram()
     count = 1
     vibration_data = []
     init_time = time.time()
@@ -98,3 +96,5 @@ while True:
     if length_of_dict == 2:
         frequency = float(dict(frequency)[1])/1000
         print(frequency)
+
+    
